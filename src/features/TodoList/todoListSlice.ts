@@ -26,7 +26,13 @@ export const todoListSlice = createAppSlice({
         ...action.payload,
       });
     }),
+    toggleTodo: create.reducer<string>((state, action) => {
+      const todo = state.todos.find(todo => todo.id === action.payload);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+    }),
   }),
 })
 
-export const { addTodo } = todoListSlice.actions;
+export const { addTodo, toggleTodo } = todoListSlice.actions;

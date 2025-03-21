@@ -76,12 +76,13 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
           <Popover
             className={css({
               color: "white",
-              backgroundColor: "slate.800",
+              backgroundColor: "slate.700",
               borderRadius: "md",
               borderWidth: 2,
-              borderColor: "slate.700",
+              borderColor: "slate.400",
               padding: 2,
               width: "340px",
+              shadow: "lg",
             })}
           >
             <Dialog>

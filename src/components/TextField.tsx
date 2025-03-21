@@ -5,10 +5,11 @@ import {
   type TextFieldProps as AriaTextFieldProps,
 } from "react-aria-components"
 import { css, cva, type Styles } from "../../styled-system/css"
-import { splitCssProps, type HTMLStyledProps } from "../../styled-system/jsx"
+import { splitCssProps } from "../../styled-system/jsx"
+import type { JsxStyleProps } from "../../styled-system/types"
 
 type TextFieldProps = Omit<AriaTextFieldProps, "className"> &
-  Omit<HTMLStyledProps<"div">, "onChange"> & {
+  JsxStyleProps & {
     label?: string
   }
 

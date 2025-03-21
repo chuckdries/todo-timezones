@@ -6,9 +6,10 @@ import { cva } from "../../styled-system/css"
 
 interface ButtonProps extends AriaButtonProps {
   variant?: "primary" | "quiet"
+  circle?: boolean
 }
 
-export function Button({ variant = "primary", ...props }: ButtonProps) {
+export function Button({ variant = "primary", circle, ...props }: ButtonProps) {
   return (
     <AriaButton
       {...props}
@@ -20,12 +21,17 @@ export function Button({ variant = "primary", ...props }: ButtonProps) {
             p: 2,
           },
           variants: {
+            circle: {
+              true: {
+                borderRadius: "full",
+              },
+            },
             variant: {
               primary: {
                 base: {
                   bg: "blue.900",
                   borderColor: "blue.700",
-                  borderWidth: 1,
+                  borderWidth: 2,
                 },
                 _hover: {
                   bg: "blue.800",
@@ -42,7 +48,7 @@ export function Button({ variant = "primary", ...props }: ButtonProps) {
               },
             },
           },
-        })({ ...state, variant })
+        })({ ...state, variant, circle })
       }
     />
   )
