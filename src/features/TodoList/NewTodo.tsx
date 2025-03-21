@@ -37,7 +37,7 @@ export function NewTodo() {
         setDueDate(null)
       }}
     >
-      <div className={css({ display: "flex", gap: 2})}>
+      <div className={css({ display: "flex", gap: 2 })}>
         <TextField
           flex={1}
           autoFocus
@@ -51,20 +51,36 @@ export function NewTodo() {
             <DatePicker
               granularity="day"
               label="Due Date"
-              minValue={now("UTC")}
+              // minValue={now("UTC")}
               value={dueDate}
               onChange={setDueDate}
             />
           </>
         ) : (
-          <Button css={{py: 3, alignSelf: "flex-end"}} variant="quiet" onPress={() => setDueDate(now("UTC"))}>
+          <Button
+            css={{ py: 3, alignSelf: "flex-end" }}
+            variant="quiet"
+            onPress={() => setDueDate(now("UTC"))}
+          >
             <Calendar />
           </Button>
         )}
       </div>
-      <div className={css({display: "flex", gap: 2})}>
-        {title || dueDate ? <Button variant="secondary" onPress={() => {setTitle(""); setDueDate(null)}}>Cancel</Button> : null}  
-        <Button isDisabled={!title} css={{flex: 1}} type="submit">Add</Button>
+      <div className={css({ display: "flex", gap: 2 })}>
+        {title || dueDate ? (
+          <Button
+            variant="secondary"
+            onPress={() => {
+              setTitle("")
+              setDueDate(null)
+            }}
+          >
+            Cancel
+          </Button>
+        ) : null}
+        <Button isDisabled={!title} css={{ flex: 1 }} type="submit">
+          Add
+        </Button>
       </div>
     </form>
   )
