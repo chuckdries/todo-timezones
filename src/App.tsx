@@ -1,66 +1,64 @@
-import "./App.css"
-import { Counter } from "./features/counter/Counter"
-import { Quotes } from "./features/quotes/Quotes"
-import logo from "./logo.svg"
-
+import { css } from "../styled-system/css"
+import { useAppDispatch, useAppSelector } from "./app/hooks"
+import { addTodo } from "./features/TodoList/todoListSlice"
+import { TextField } from "./components/TextField"
+import { Button } from "./components/Button"
+import { NewTodo } from "./features/TodoList/NewTodo"
 const App = () => {
+  const dispatch = useAppDispatch()
+  const todos = useAppSelector(state => state.todoList.todos)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Quotes />
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div
+      className={css({
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        p: 4,
+        backgroundColor: "slate.900",
+        color: "white",
+      })}
+    >
+      <h1 className={css({ fontSize: "2xl", fontWeight: "bold" })}>Tasks</h1>
+      <ul
+        className={css({
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+        })}
+      >
+        {!todos.length && (
+          <p
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              p: 2,
+              color: "slate.400",
+              bg: "slate.800",
+              borderRadius: "md",
+            })}
           >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org"
-            target="_blank"
-            rel="noopener noreferrer"
+            No tasks yet
+          </p>
+        )}
+        {todos.map(todo => (
+          <li
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              p: 2,
+              bg: "slate.800",
+              borderRadius: "md",
+            })}
+            key={todo.id}
           >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://reselect.js.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Reselect
-          </a>
-        </span>
-      </header>
+            {todo.title}
+          </li>
+        ))}
+      </ul>
+      <NewTodo />
     </div>
   )
 }
