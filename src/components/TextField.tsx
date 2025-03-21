@@ -4,7 +4,7 @@ import {
   Label,
   type TextFieldProps as AriaTextFieldProps,
 } from "react-aria-components"
-import { css, cva, type Styles } from "../../styled-system/css"
+import { css, cva } from "../../styled-system/css"
 import { splitCssProps } from "../../styled-system/jsx"
 import type { JsxStyleProps } from "../../styled-system/types"
 

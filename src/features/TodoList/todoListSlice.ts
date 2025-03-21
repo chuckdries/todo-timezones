@@ -32,7 +32,10 @@ export const todoListSlice = createAppSlice({
         todo.completed = !todo.completed;
       }
     }),
+    deleteTodo: create.reducer<string>((state, action) => {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    }),
   }),
 })
 
-export const { addTodo, toggleTodo } = todoListSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo } = todoListSlice.actions;

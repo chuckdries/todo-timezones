@@ -2,10 +2,10 @@ import { css, cva } from "../../../styled-system/css"
 import { Checkbox } from "../../components/Checkbox"
 import type { Card } from "./todoListSlice"
 import { useAppDispatch } from "../../app/hooks"
-import { toggleTodo } from "./todoListSlice"
+import { deleteTodo, toggleTodo } from "./todoListSlice"
 import { Button } from "../../components/Button"
 import { DateFormatter, parseZonedDateTime } from "@internationalized/date"
-import { Edit, Trash } from "lucide-react"
+import { Trash } from "lucide-react"
 
 export function TodoCard({ card }: { card: Card }) {
   const dispatch = useAppDispatch()
@@ -62,10 +62,7 @@ export function TodoCard({ card }: { card: Card }) {
           : ""}
       </span>
       <div>
-        <Button variant="quiet" circle>
-          <Edit size={16} />
-        </Button>
-        <Button variant="quiet" circle>
+        <Button variant="quiet" css={{_hover: { color: "red.400"}}} circle onPress={() => dispatch(deleteTodo(card.id))}>
           <Trash size={16} />
         </Button>
       </div>

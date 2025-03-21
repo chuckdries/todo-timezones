@@ -5,7 +5,7 @@ import {
 import { css, cva } from "../../styled-system/css"
 import type { SystemStyleObject } from "../../styled-system/types"
 interface ButtonProps extends AriaButtonProps {
-  variant?: "primary" | "quiet"
+  variant?: "primary" | "secondary" | "quiet"
   circle?: boolean
   css?: SystemStyleObject
 }
@@ -15,6 +15,11 @@ const buttonVariants = cva({
     color: "white",
     borderRadius: "xl",
     p: 2,
+    _disabled: {
+      bg: "slate.700!",
+      borderColor: "slate.600!",
+      color: "slate.400!",
+    },
   },
   variants: {
     circle: {
@@ -32,6 +37,17 @@ const buttonVariants = cva({
         _hover: {
           bg: "blue.800",
           borderColor: "blue.600",
+        },
+      },
+      secondary: {
+        base: {
+          bg: "slate.600",
+          borderColor: "slate.500",
+          borderWidth: 2,
+        },
+        _hover: {
+          bg: "slate.500",
+          borderColor: "slate.400",
         },
       },
       quiet: {

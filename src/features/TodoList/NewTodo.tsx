@@ -7,7 +7,7 @@ import { useState } from "react"
 import { DatePicker } from "../../components/DatePicker"
 import { now } from "@internationalized/date"
 import type { DateValue } from "react-aria-components"
-import { Calendar, CircleX, X } from "lucide-react"
+import { Calendar } from "lucide-react"
 
 export function NewTodo() {
   const dispatch = useAppDispatch()
@@ -34,6 +34,7 @@ export function NewTodo() {
           }),
         )
         setTitle("")
+        setDueDate(null)
       }}
     >
       <div className={css({ display: "flex", gap: 2})}>
@@ -54,9 +55,6 @@ export function NewTodo() {
               value={dueDate}
               onChange={setDueDate}
             />
-            <Button css={{py: 3, alignSelf: "flex-end"}} variant="quiet" onPress={() => setDueDate(null)}>
-              <CircleX />
-            </Button>
           </>
         ) : (
           <Button css={{py: 3, alignSelf: "flex-end"}} variant="quiet" onPress={() => setDueDate(now("UTC"))}>
@@ -64,7 +62,10 @@ export function NewTodo() {
           </Button>
         )}
       </div>
-      <Button type="submit">Add</Button>
+      <div className={css({display: "flex", gap: 2})}>
+        {title || dueDate ? <Button variant="secondary" onPress={() => {setTitle(""); setDueDate(null)}}>Cancel</Button> : null}  
+        <Button isDisabled={!title} css={{flex: 1}} type="submit">Add</Button>
+      </div>
     </form>
   )
 }
