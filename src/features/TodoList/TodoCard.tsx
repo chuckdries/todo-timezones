@@ -27,7 +27,6 @@ export function TodoCard({ card }: { card: Card }) {
           p: 2,
           bg: "slate.800",
           borderRadius: "full",
-          pr: 4,
           _selected: {
             color: "slate.400",
           },

@@ -2,7 +2,7 @@ import {
   Checkbox as AriaCheckbox,
   type CheckboxProps as AriaCheckboxProps,
 } from "react-aria-components"
-import { css, cva } from "../../styled-system/css"
+import { css } from "../../styled-system/css"
 import type { ReactNode } from "react"
 
 interface CheckboxProps extends AriaCheckboxProps {
