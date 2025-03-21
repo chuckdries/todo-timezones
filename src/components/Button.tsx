@@ -34,7 +34,7 @@ const buttonVariants = cva({
           borderColor: "blue.700",
           borderWidth: 2,
         },
-        _hover: {
+        "&[data-hovered]": {
           bg: "blue.800",
           borderColor: "blue.600",
         },
@@ -45,7 +45,7 @@ const buttonVariants = cva({
           borderColor: "slate.500",
           borderWidth: 2,
         },
-        _hover: {
+        "&[data-hovered]": {
           bg: "slate.500",
           borderColor: "slate.400",
         },
@@ -54,7 +54,7 @@ const buttonVariants = cva({
         base: {
           bg: "transparent",
         },
-        _hover: {
+        "&[data-hovered]": {
           bg: "slate.700",
         },
       },

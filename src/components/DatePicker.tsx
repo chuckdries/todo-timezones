@@ -94,9 +94,9 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
             className={css({
               color: "white",
               backgroundColor: "slate.700",
-              borderRadius: "md",
+              borderRadius: "xl",
               borderWidth: 2,
-              borderColor: "slate.400",
+              borderColor: "slate.500",
               padding: 2,
               width: "340px",
               shadow: "lg",
