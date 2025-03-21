@@ -1,12 +1,8 @@
 import { css } from "../styled-system/css"
-import { useAppDispatch, useAppSelector } from "./app/hooks"
-import { addTodo } from "./features/TodoList/todoListSlice"
-import { TextField } from "./components/TextField"
-import { Button } from "./components/Button"
+import { useAppSelector } from "./app/hooks"
 import { NewTodo } from "./features/TodoList/NewTodo"
 import { TodoCard } from "./features/TodoList/TodoCard"
 const App = () => {
-  const dispatch = useAppDispatch()
   const todos = useAppSelector(state => state.todoList.todos)
   return (
     <div
@@ -37,8 +33,6 @@ const App = () => {
               gap: 2,
               p: 2,
               color: "slate.400",
-              bg: "slate.800",
-              borderRadius: "md",
             })}
           >
             No tasks yet

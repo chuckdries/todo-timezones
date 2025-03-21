@@ -13,43 +13,40 @@ export function Checkbox({ children, ...props }: CheckboxProps) {
     <AriaCheckbox {...props}>
       {({ isIndeterminate, isSelected }) => (
         <div className={css({ display: "flex", alignItems: "center", gap: 2 })}>
-        <div
-          className={cva({
-            base: {
+          <div
+            aria-selected={isSelected}
+            className={css({
               w: 8,
               h: 8,
               borderRadius: "full",
               borderWidth: 2,
               p: 1,
-              borderColor: "slate.700",
-            },
-            variants: {
-              isSelected: {
-                false: {
-                  borderColor: "blue.700",
-                },
+              _selected: {
+                borderColor: "slate.700",
+                shadow: "none",
               },
-            },
-          })({ isSelected })}
-        >
-          <svg
-            className={css({
-              fill: "none",
-              stroke: "green.700",
-              strokeWidth: 2,
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              opacity: isSelected ? 1 : 0,
+              borderColor: "blue.500",
+              shadow: "glow",
             })}
-            viewBox="0 0 18 18"
-            aria-hidden="true"
           >
-            {isIndeterminate ? (
-              <rect x={1} y={7.5} width={15} height={3} />
-            ) : (
-              <polyline points="1 9 7 14 15 4" />
-            )}
-          </svg>
+            <svg
+              className={css({
+                fill: "none",
+                stroke: "green.700",
+                strokeWidth: 2,
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                opacity: isSelected ? 1 : 0,
+              })}
+              viewBox="0 0 18 18"
+              aria-hidden="true"
+            >
+              {isIndeterminate ? (
+                <rect x={1} y={7.5} width={15} height={3} />
+              ) : (
+                <polyline points="1 9 7 14 15 4" />
+              )}
+            </svg>
           </div>
           {children}
         </div>

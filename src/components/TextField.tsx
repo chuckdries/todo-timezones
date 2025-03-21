@@ -42,7 +42,7 @@ export function TextField({ label, ...props }: TextFieldProps) {
           return cva({
             base: {
               backgroundColor: "slate.900",
-              borderRadius: "md",
+              borderRadius: "xl",
               borderWidth: 2,
               borderColor: "slate.700",
               p: 2,

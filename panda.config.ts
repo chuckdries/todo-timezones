@@ -14,6 +14,13 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      tokens: {
+        shadows: {
+          glow: {
+            value: "0 0 8px {colors.blue.500/50}",
+          },
+        },
+      },
       semanticTokens: {
         colors: {
           Background: {

@@ -7,11 +7,12 @@ import { useState } from "react"
 import { DatePicker } from "../../components/DatePicker"
 import { now } from "@internationalized/date"
 import type { DateValue } from "react-aria-components"
+import { Calendar, CircleX, X } from "lucide-react"
 
 export function NewTodo() {
   const dispatch = useAppDispatch()
   const [title, setTitle] = useState("")
-  const [dueDate, setDueDate] = useState<DateValue | null>(now("UTC"))
+  const [dueDate, setDueDate] = useState<DateValue | null>(null)
   return (
     <form
       className={css({
@@ -25,12 +26,17 @@ export function NewTodo() {
       onSubmit={e => {
         e.preventDefault()
         dispatch(
-          addTodo({ title, description: "", dueDate: dueDate?.toString() ?? "", completed: false }),
+          addTodo({
+            title,
+            description: "",
+            dueDate: dueDate?.toString() ?? "",
+            completed: false,
+          }),
         )
         setTitle("")
       }}
     >
-      <div className={css({ display: "flex", gap: 2 })}>
+      <div className={css({ display: "flex", gap: 2})}>
         <TextField
           flex={1}
           autoFocus
@@ -39,12 +45,24 @@ export function NewTodo() {
           value={title}
           onChange={setTitle}
         />
-        <DatePicker
-          granularity="day"
-          label="Due Date"
-          value={dueDate}
-          onChange={setDueDate}
-        />
+        {dueDate ? (
+          <>
+            <DatePicker
+              granularity="day"
+              label="Due Date"
+              minValue={now("UTC")}
+              value={dueDate}
+              onChange={setDueDate}
+            />
+            <Button css={{py: 3, alignSelf: "flex-end"}} variant="quiet" onPress={() => setDueDate(null)}>
+              <CircleX />
+            </Button>
+          </>
+        ) : (
+          <Button css={{py: 3, alignSelf: "flex-end"}} variant="quiet" onPress={() => setDueDate(now("UTC"))}>
+            <Calendar />
+          </Button>
+        )}
       </div>
       <Button type="submit">Add</Button>
     </form>

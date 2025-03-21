@@ -10,11 +10,13 @@ import {
   Heading,
   Label,
   Popover,
+  Button as AriaButton,
   type DatePickerProps as AriaDatePickerProps,
   type DateValue,
   CalendarGridBody,
   CalendarGridHeader,
   CalendarHeaderCell,
+  FieldError,
 } from "react-aria-components"
 import { css, cva } from "../../styled-system/css"
 import { Button } from "./Button"
@@ -28,7 +30,7 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
       className={css({ display: "flex", flexDirection: "column", gap: 1 })}
       {...props}
     >
-      {({ isFocusWithin, isOpen }) => (
+      {({ isFocusWithin, isOpen, isInvalid }) => (
         <>
           <Label className={css({ fontSize: "sm" })}>{label}</Label>
           <Group
@@ -36,10 +38,12 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
               base: {
                 display: "flex",
                 alignItems: "baseline",
+                justifyContent: "space-between",
                 backgroundColor: "slate.900",
-                borderRadius: "md",
+                borderRadius: "xl",
                 borderWidth: 2,
                 borderColor: "slate.700",
+                overflow: "hidden",
               },
               variants: {
                 isFocusWithin: {
@@ -53,8 +57,13 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
                     backgroundColor: "slate.700",
                   },
                 },
+                isInvalid: {
+                  true: {
+                    borderColor: "red.500",
+                  },
+                },
               },
-            })({ isFocusWithin, isOpen })}
+            })({ isFocusWithin, isOpen, isInvalid })}
           >
             <DateInput className={css({ display: "flex", mx: 2 })}>
               {segment => (
@@ -70,9 +79,17 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
                 />
               )}
             </DateInput>
-            <Button variant="quiet">▼</Button>
+            <AriaButton
+              className={css({
+                p: 2,
+                _hover: { bg: "slate.700" },
+                _focus: { bg: "blue.800" },
+              })}
+            >
+              ▼
+            </AriaButton>
           </Group>
-
+          <FieldError className={css({ color: "red.300" })} />
           <Popover
             className={css({
               color: "white",
@@ -143,32 +160,25 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
                   >
                     {date => (
                       <CalendarCell
-                        className={({ isSelected, isOutsideMonth }) => {
-                          return cva({
-                            base: {
-                              p: 2,
-                              rounded: "md",
-                              textAlign: "center",
-                              _hover: {
-                                bg: "blue.700",
-                              },
-                              borderWidth: 2,
-                              borderColor: "transparent",
+                        className={css({
+                          p: 2,
+                          rounded: "md",
+                          textAlign: "center",
+                          _hover: {
+                            bg: "blue.700",
+                          },
+                          borderWidth: 2,
+                          borderColor: "transparent",
+                          _selected: {
+                            borderColor: "blue.500",
+                          },
+                          _disabled: {
+                            color: "white/40",
+                            _hover: {
+                              bg: "transparent",
                             },
-                            variants: {
-                              isSelected: {
-                                true: {
-                                  borderColor: "blue.500",
-                                },
-                              },
-                              isOutsideMonth: {
-                                true: {
-                                  color: "white/50",
-                                },
-                              },
-                            },
-                          })({ isSelected, isOutsideMonth })
-                        }}
+                          },
+                        })}
                         date={date}
                       />
                     )}
