@@ -36,7 +36,7 @@ export function DatePicker({ label, ...props }: DatePickerProps) {
               base: {
                 display: "flex",
                 alignItems: "baseline",
-                backgroundColor: "slate.800",
+                backgroundColor: "slate.900",
                 borderRadius: "md",
                 borderWidth: 2,
                 borderColor: "slate.700",

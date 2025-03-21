@@ -25,6 +25,7 @@ const App = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
+          mb: 4
         })}
       >
         {!todos.length && (

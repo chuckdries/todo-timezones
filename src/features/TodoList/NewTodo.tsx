@@ -18,10 +18,9 @@ export function NewTodo() {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        // bg: "slate.800/60",
-        border: "1px solid {colors.slate.700}",
-        p: 2,
-        borderRadius: "md",
+        bg: "slate.800",
+        p: 4,
+        borderRadius: "xl",
       })}
       onSubmit={e => {
         e.preventDefault()
@@ -33,7 +32,7 @@ export function NewTodo() {
     >
       <div className={css({ display: "flex", gap: 2 })}>
         <TextField
-          className={css.raw({ flexGrow: 1 })}
+          flex={1}
           autoFocus
           label="Task"
           name="title"

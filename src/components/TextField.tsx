@@ -5,21 +5,28 @@ import {
   type TextFieldProps as AriaTextFieldProps,
 } from "react-aria-components"
 import { css, cva, type Styles } from "../../styled-system/css"
+import { splitCssProps, type HTMLStyledProps } from "../../styled-system/jsx"
 
-type TextFieldProps = Omit<AriaTextFieldProps, "className"> & {
-  label?: string;
-  className?: Styles
-}
+type TextFieldProps = Omit<AriaTextFieldProps, "className"> &
+  Omit<HTMLStyledProps<"div">, "onChange"> & {
+    label?: string
+  }
 
-export function TextField({ label, className, ...props }: TextFieldProps) {
+export function TextField({ label, ...props }: TextFieldProps) {
+  const [cssProps, restProps] = splitCssProps(props)
+  const { css: cssProp, ...styleProps } = cssProps
   return (
     <AriaTextField
-      {...props}
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: 1,
-      }, className)}
+      {...restProps}
+      className={css(
+        {
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
+        },
+        styleProps,
+        cssProp,
+      )}
     >
       <Label
         className={css({
@@ -33,7 +40,7 @@ export function TextField({ label, className, ...props }: TextFieldProps) {
         className={state => {
           return cva({
             base: {
-              backgroundColor: "slate.800",
+              backgroundColor: "slate.900",
               borderRadius: "md",
               borderWidth: 2,
               borderColor: "slate.700",
